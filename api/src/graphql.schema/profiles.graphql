@@ -1,0 +1,20 @@
+type Profile {
+  id: ID!
+  user: User
+  age: String!
+  name: String!
+  selfIntroduction: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input CreateProfileInput {
+  userId: String!
+  age: String!
+  name: String!
+  selfIntroduction: String!
+}
+
+type Mutation {
+  createProfile(createProfileInput: CreateProfileInput!): Profile!
+}

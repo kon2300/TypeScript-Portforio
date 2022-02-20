@@ -1,0 +1,31 @@
+type Article {
+  id: ID!
+  users: User
+  comment: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input CreateArticleInput {
+  userId: String!
+  comment: String!
+}
+
+input UpdateArticleInput {
+  comment: String!
+}
+
+input RemoveArticleInput {
+  id: String!
+}
+
+type Query {
+  findAllArticle: [Article]!
+  findOneArticle(id: String!): Article
+}
+
+type Mutation {
+  createArticle(createArticleInput: CreateArticleInput!): Article!
+  updateArticle(updateArticleInput: UpdateArticleInput!): Article!
+  removeArticle(removeArticleInput: RemoveArticleInput!): Article!
+}

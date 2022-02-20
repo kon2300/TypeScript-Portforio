@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id                String     @id @default(uuid())
+  email             String     @unique
+  password          String
+  emailVerifiedAt   DateTime?
+  profileVerifiedAt DateTime?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  articles          Articles[]
+  profile           Profiles?
+  likes             Likes[]
+}
+
+model Profiles {
+  id               String   @id @default(uuid())
+  user             Users    @relation(fields: [userId], references: [id])
+  userId           String   @unique
+  name             String
+  age              String
+  selfIntroduction String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Articles {
+  id        String   @id @default(uuid())
+  users     Users    @relation(fields: [userId], references: [id])
+  userId    String
+  comment   String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  likes     Likes[]
+}
+
+model Likes {
+  users     Users    @relation(fields: [userId], references: [id])
+  userId    String
+  articles  Articles @relation(fields: [articleId], references: [id])
+  articleId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([userId, articleId])
+}
