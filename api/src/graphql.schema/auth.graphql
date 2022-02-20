@@ -1,0 +1,19 @@
+type Auth {
+  email: String!
+  password: String!
+}
+
+type Token {
+  id: ID!
+  accessToken: String!
+}
+
+input LoginAuthInput {
+  id: ID
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  loginAuth(loginAuthInput: LoginAuthInput!): Token!
+}

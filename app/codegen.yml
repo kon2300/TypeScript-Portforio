@@ -1,0 +1,10 @@
+overwrite: true
+schema: http://api:3000/graphql
+generates:
+  src/generated/graphql.ts:
+    documents:
+      - 'src/generated/index.ts'
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-vue-apollo

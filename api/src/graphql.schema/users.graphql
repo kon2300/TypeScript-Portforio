@@ -1,0 +1,30 @@
+type User {
+  id: ID!
+  profile: Profile
+  articles: [Article]
+  email: String!
+  password: String!
+  emailVerifiedAt: DateTime
+  profileVerifiedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+}
+
+input RemoveUserInput {
+  id: String!
+}
+
+type Query {
+  findAllUser: [User]!
+  findOneUser(id: ID, email: String): User
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  removeUser(removeUserInput: RemoveUserInput!): User!
+}
